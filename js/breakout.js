@@ -89,16 +89,137 @@ function drawBricks() {
     })
 }
 
+console.log(bricks)
+
 // Draw everything
 function draw() {
+    ctx.clearRect(0, 0, canvas.width,canvas.height)
     drawPaddle()
     drawBall()
     drawScore()
     drawBricks()
 }
 
-drawPaddle()
-drawball()
+// Move paddle on canvas
+function movePaddle() {
+    paddle.x = paddle.x + paddle.dx
+
+    // wall detection
+    if (paddle.x < 0) {
+        paddle.x = 0
+    }
+    if (paddle.x + paddle.w > canvas.width) {
+        paddle.x = canvas.width - paddle.w
+    }
+
+}
+
+// Keydown Event
+function keydown(e) {
+   // console.log(e.key)
+   if (e.key == 'ArrowRight' || e.key == 'Right') {
+    paddle.dx = paddle.speed
+   }
+   if (e.key == 'ArrowLeft' || e.key == 'Left') {
+    paddle.dx = -paddle.speed
+   }
+}
+
+// Keyup Event
+function keyUp() {
+    id (e.key == 'ArrowRight' ||
+    e.key == 'Right' ||
+    e.key == 'ArrowLeft' ||
+    e.key == 'Left') {
+        paddle.dx = 0
+    }
+}
+
+// Keyboard event handlers
+document.addEventListnener('keydown', keyDown)
+document.addEventListener('keyup', keyUp)
+
+function moveball() {
+    ball.x = ball.x + ball.dx
+    ball.y = ball.y + ball.dy
+
+    //wall collision (top)
+    if (ball.y + ball.size < 0) {
+        ball.dy = -1 * ball.dy
+    }
+
+    //wall collision (Right)
+    if (ball.x + ball.size > canvas.width) {
+        ball.dx = -1 * ball.dx
+    }
+
+    //wall collision (bottom)
+    if (ball.y + ball.size > canvas.height) {
+        ball.dy = -1 * ball.dy
+        showAllBricks()
+        score = 0
+    }
+
+    //wall collision (left)
+    if (ball.x + ball.size < 0) {
+        ball.dx = -1 * ball.dx
+    }
+
+    //paddle collision
+    if (
+        ball.x - ball.size > paddle.x &&
+        ball.x + ball.size < paddle.x + paddle.w &&
+        ball.y + ball.size > paddle.y
+    ) {
+      ball.dy = -1 * ball.speed
+    }
+
+    //Brick collision
+    bricks.forEach(column => {
+        column.forEach(brick => {
+          if (brick.visible) {
+            if (
+               ball.x - ball.size > brick.x && //left brick side
+               ball.x + ball.size < brick.x + brick.w && //right
+               ball.y + ball.size > brick.y && //top
+               ball.y - ball.size < brick.y + brick.h //bottom
+            )
+            ball.dy = -1 * ball.dy
+            brick.visible = false
+            increaseScore()
+          }
+        })
+    })
+}
+
+
+//increase score
+function increaseScore() {
+    score++ //score = score
+
+    if (score == brickRowCount * brickColumnCount) {
+       score = 0
+       showAllBricks()
+    }
+}
+
+function showAllBricks() {
+    brick.forEach(column => {
+       column.forEach(brick => {
+         brick.visible = true
+       })
+    })
+}
+
+// Update canvas drawing and animation
+function update() {
+    moveball()
+    movePaddle()
+    draw()
+    requestAnimationFrame(update)
+}
+
+update()
 
 // Rules open and close event handlers
 rulesBtn.addEventListener('click', () => {
