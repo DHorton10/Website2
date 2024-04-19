@@ -2,7 +2,7 @@ console.log("CONNECTED")
 
 const screens = document.querySelectorAll('.screen')
 const choose_insect_btns = document.querySelectorAll('.choose-insect-btn')
-const game_container = document.getElementById('game-contanier')
+const game_container = document.getElementById('game-container')
 const start_btn = document.getElementById('start-btn')
 const timeEl = document.getElementById('time')
 const scoreEL = document.getElementById('score')
@@ -53,7 +53,7 @@ function createInsect() {
     insect.style.left = `${x}px`
     insect.innerHTML = `<img src="${selected_insect.src}" alt="${selected_insect.alt}" style = "transform: rotate(${Math.random() * 360}deg" />`
     insect.addEventListener('click', catchInsect)
-
+    console.log(insect)
     game_container.appendChild(insect)
 }
 
