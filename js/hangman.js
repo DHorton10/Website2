@@ -34,6 +34,9 @@ function displayWord() {
   }
 }
 
-
+// Keydown letter press
+window.addEventListener('keydown', e => {
+  console.log(e.keyCode)
+})
 
 displayWord()
