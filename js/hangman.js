@@ -40,6 +40,8 @@ function updateWrongLettersEl() {
     ${wrongLetter.length > 0 ? '<p>Wrong</p>' : ''}
     ${wrongLetters.map(letter => `<span>${letter}</span>`)}
   `
+
+  figureParts.forEach()
 }
 
 // Show Notification
