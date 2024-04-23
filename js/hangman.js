@@ -37,8 +37,8 @@ function displayWord() {
 // Update the wrong letters
 function updateWrongLettersEl() {
   // Display wrong letters
-  wrongLetterEl.innerHTML = `
-    ${wrongLetter.length > 0 ? '<p>Wrong</p>' : ''}
+  wrongLettersEl.innerHTML = `
+    ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
     ${wrongLetters.map(letter => `<span>${letter}</span>`)}
   `
 
