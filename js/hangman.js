@@ -41,7 +41,15 @@ function updateWrongLettersEl() {
     ${wrongLetters.map(letter => `<span>${letter}</span>`)}
   `
 
-  figureParts.forEach()
+  figureParts.forEach((part, index) => {
+    const errors = wrongLetters.length
+
+    if (index < errors) {
+      part.style.display = 'block'
+    } else {
+      part.style.display = 'none'
+    }
+  })
 }
 
 // Show Notification
