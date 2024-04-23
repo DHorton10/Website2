@@ -58,7 +58,6 @@ function updateWrongLettersEl() {
     popup.style.display = 'flex'
   }
 
-
 }
 
 // Show Notification
@@ -96,5 +95,12 @@ window.addEventListener('keydown', e => {
     }
   }
 })
+
+// Restart game and play again
+playAgainBtn.addEventListener('click', () => {
+  correctLetters.length = 0
+  wrongLetters.length = 0
+})
+
 
 displayWord()
