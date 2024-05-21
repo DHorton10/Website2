@@ -137,7 +137,7 @@ function keyUp() {
 }
 
 // Keyboard event handlers
-document.addEventListnener('keydown', keyDown)
+document.addEventListener('keydown', keyDown)
 document.addEventListener('keyup', keyUp)
 
 function moveball() {
